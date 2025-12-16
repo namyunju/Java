@@ -215,3 +215,63 @@ public class Solution {
 }
 ```
 </details>
+
+<details><summary>Iterator</summary>
+연결리스트에서 반복자의 사용
+
+- 배열에서 index를 이용해 특정 위치의 원소를 바로 구할 수 있었던 것 처럼
+- 연결 리스트에서는 iterator를 이용해 특정 위치를 지정
+- iterator 값이 주어지면 prev, next 활용하여 삽입 삭제를 빠르게 진행
+
+사용 이유
+- 한 번의 삽입 삭제 연산을 위해서는 사전 탐색 O(N) 시간 소요
+- 여러 번 동일 위치에 삽입, 삭제하는 경우 이미 정의되어 있던 iterator를 유지하며 삽입 / 삭제 연산을 편하게 적용
+
+### 사용 방법
+
+**선언**
+```
+ListIterator<Character> it = l.listIterator();
+```
+l의 이터레이터. 첫 위치에 놓이게 됨
+
+```
+ListIterator<Character> it = l.listIterator(l.size());
+```
+끝 위치에 놓고 시작하려면 위 형태
+
+
+**이동**
+- .hasNext()로 다음 위치 이동 가능 확인, .next()로 이동
+- .hasPrevious()로 이전 위치 이동 가능 확인, .previous()로 이동
+```
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+public class Main {
+  public static void main(String[] args) {
+    LinkedList<Character> l = new LinkedList<>();
+    l.add('a');
+    l.add('b');
+    l.add('c');
+
+    ListIterator<Character> it = l.listIterator();
+
+    while(it.hasNext()) {
+      System.out.println(it.next());
+    }
+  }
+}
+```
+**삭제**
+it.remove()
+- 직전에 it.next()를 진행했던 원소를 제거
+- 꼭 it.remove() 실행 전에 it.next() 수행 되어야 함
+- 삭제 이후 it의 위치는 자동 변경
+
+**삽입**
+it.add(E)
+- it 위치에 새로운 원소 E를 삽입
+
+
+</details>
